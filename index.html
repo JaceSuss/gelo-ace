@@ -1,0 +1,497 @@
+ 
+<html>
+ 
+<head>
+        <title>4 Angel</title>
+         
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    
+    
+
+ <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet">
+ 
+ 
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script src="booklet/jquery.easing.1.3.js" type="text/javascript"></script>
+		<script src="booklet/jquery.booklet.1.1.0.min.js" type="text/javascript"></script>
+
+		<link href="booklet/jquery.booklet.1.1.0.css" type="text/css" rel="stylesheet" media="screen" />
+		 
+		 
+		 <style>
+         
+              *{
+	margin:0;
+	padding:0;
+}
+body{
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	background: #efe2b9;
+	opacity: 1;
+	background-image:  radial-gradient(#4a8959 0.9px, transparent 0.9px), radial-gradient(#4a8959 0.9px, #efe2b9 0.9px);
+	background-size: 36px 36px;
+	background-position: 0 0,18px 18px;
+
+	
+	color:#393939;
+	font-size:12px;
+	color: #333;
+
+
+	font-family:monospace;
+}
+ 
+.audio h1{
+	margin-top: 50px;
+
+	flex-direction: column;
+    display: flex;
+    justify-content: center;
+	align-items: center;
+
+}
+
+.audio h2{
+
+	margin-bottom: 50px;
+	color: #4a8959;
+
+	flex-direction: column;
+    display: flex;
+    justify-content: center;
+	align-items: center;
+}
+
+.audio{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+
+    
+}
+ 
+.booklet           {
+	width:900px;
+	height:607px;
+	position:relative;
+	margin:0 auto 10px;
+	-moz-box-shadow:0px 0px 1px #fff;
+	-webkit-box-shadow:0px 0px 1px #fff;
+	box-shadow:0px 0px 1px #fff;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+.booklet .b-wrap-left  {
+
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+.booklet .b-wrap-right {
+	/*background:#efefef url(images/right_bg.jpg) no-repeat top left;*/
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.booklet .b-counter {
+	bottom:10px;
+	position:absolute;
+	display:block;
+	width:90%;
+	height:20px;
+	border-top:1px solid rgb(236, 236, 236);
+	color:#222;
+	text-align:center;
+	font-size:12px;
+	padding:5px 0 0;
+	background:transparent;
+	-moz-box-shadow:0px -1px 1px #fff;
+	-webkit-box-shadow:0px -1px 1px #fff;
+	box-shadow:0px -1px 1px #fff;
+	opacity:0.8;
+    font-family: 'Bohemian Soul';
+}
+.book_wrapper{
+	margin:0 auto;
+	padding-top:50px;
+	width:905px;
+	height:540px;
+	position:relative;
+	background:transparent url(images/bg.png) no-repeat 9px 27px;
+}
+.book_wrapper h1{
+	color:rgb(73, 105, 54);
+	margin:5px 5px 5px 15px;
+	font-size:24px;
+	background:transparent url(images/h1.png) no-repeat bottom left;
+	padding-bottom:7px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+.book_wrapper p{
+	font-size:15px;
+	margin:5px 5px 5px 15px;
+}
+.book_wrapper a.article,
+.book_wrapper a.demo{
+	background:transparent url(images/circle.png) no-repeat 50% 0px;
+	display:block;
+	width:95px;
+	height:41px;
+	text-decoration:none;
+	outline:none;
+	font-size:16px;
+	color:#555;
+	float:left;
+	line-height:41px;
+	padding-left:47px;
+}
+.book_wrapper a.demo{
+	margin-left:50px;
+}
+.book_wrapper a.article:hover,
+.book_wrapper a.demo:hover{
+	background-position:50% -41px;
+	color:#13386a;
+}
+.book_wrapper img{
+	margin:10px 0px 5px 35px;
+	width:300px;
+	padding:4px;
+
+	filter: drop-shadow(0px 4px 15px rgba(92, 84, 40, 0.63));
+}
+.booklet .b-wrap-right img{
+
+}
+a#next_page_button,
+a#prev_page_button{
+	display:none;
+	position:absolute;
+	width:41px;
+	height:40px;
+	cursor:pointer;
+	margin-top:-20px;
+	top:50%;
+	background:transparent url(images/buttons.png) no-repeat 0px -40px;
+}
+
+/*---------------button-------------*/
+.content__item {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	counter-increment: itemcounter;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.content__item::before {
+	color: var(--color-number);
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}
+
+.button {
+	pointer-events: auto;
+	cursor: pointer;
+	background: #fdd795;
+	border: none;
+	padding: 1.5rem 3rem;
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
+	position: relative;
+	display: inline-block;
+
+}
+
+.button:hover {
+	pointer-events: auto;
+	cursor: pointer;
+	background: #984014;
+	border: none;
+	padding: 1.5rem 3rem;
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
+	position: relative;
+	display: inline-block;
+}
+
+
+.marquee {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.marquee__inner {
+	width: fit-content;
+	display: flex;
+	position: relative;
+	--offset: 1rem;
+	--move-initial: calc(-25% + var(--offset));
+	--move-final: calc(-50% + var(--offset));
+	transform: translate3d(var(--move-initial), 0, 0);
+	animation: marquee 1s linear infinite;
+	animation-play-state: paused;
+	opacity: 0;
+
+}
+
+.button--atlas:hover .marquee__inner {
+	animation-play-state: running;
+	opacity: 1;
+	transition-duration: 0.4s;
+}
+
+.marquee span {
+	text-align: center;
+	white-space: nowrap;
+	font-style: italic;
+	padding: 1.5rem 0.5rem;
+    color: #f09678;
+    font-family: 'Old Standard TT', serif;
+    font-weight: 800;
+}
+
+@keyframes marquee {
+	0% {
+		transform: translate3d(var(--move-initial), 0, 0);
+	}
+
+	100% {
+		transform: translate3d(var(--move-final), 0, 0);
+	}
+}
+
+.button--kari a{
+ text-decoration: none;
+ color: #6E4602;
+
+}
+.button--kari {
+    font-family: 'Old Standard TT', serif;
+	font-weight: 900;
+	font-size: 1.25rem;
+	border-radius: 50%;
+}
+
+.button--kari > span {
+	display: inline-block;
+	transition: opacity 0.1s;
+}
+
+.button--kari:hover > span {
+	opacity: 0;
+    border: 2px solid #934d4d;
+    
+
+}
+
+.button--kari .marquee {
+	transform: rotate(-2.75deg);
+}
+
+.button--kari:hover .marquee__inner {
+	animation-play-state: running;
+	opacity: 1;
+	transition-duration: 0.6s;
+}
+
+
+
+
+a#prev_page_button{
+	left:-30px;
+}
+a#next_page_button{
+	right:-30px;
+	background-position:-41px -40px;
+}
+a#next_page_button:hover{
+	background-position:-41px 0px;
+}
+a#prev_page_button:hover{
+	background-position:0px 0px;
+}
+ 
+    
+    
+         </style>
+		 
+    </head>
+    <body>
+    <br><br><br><br><br>
+		<div class="audio">
+
+			<h1>
+				Hello Hello? :)
+			</h>
+
+			<h2> 
+				*Play this audio to set the mood
+			</h2>
+
+			<div>	
+			<audio controls>
+				<source src="audio/Belday.webm" type="audio/webm">
+			</audio>
+			</div>
+
+		</div>
+		 
+		<div class="book_wrapper">
+
+			<div id="mybook" style="display:none;">
+				<div class="b-load">
+					<div>
+						<img src="images/1.png" alt=""/>
+						<h1></h1>
+						<p>  </p>
+
+					</div>
+					<div>
+						<img src="images/2.jpg" alt="" />
+						<h1> Happy Birthday Gelo!</h1>
+						<p>It was really a strange and unexpected encounter, looking back to the time that we had our first interaction. 🥺 I can still remember being so shy hahaha.</p>
+
+					</div>
+					<div>
+						<img src="images/3.jpg" alt="" />
+						<h1></h1>
+						<p> You are so adorable. Can't help but to simp for such cutie lyk u. 🥺😍 And then I came to know the 100 men you are hahaha. You are so fun to talk to, and I felt a connection with you that I haven't FELT WITH ANYONE ELSE 🥺. i GET TO BE REAL AND be MYSELF without worrying.</p>
+
+					</div>
+					<div>
+						<img src="images/4.jpg" alt="" />
+						<h1></h1>
+						<p> Bec. today is your special day, I want to tell u the things that makes you special. hehe. 1. The way you compromise some things for me, so that we can enjoy the company of each other. 2. Sometimes we can just laugh about stuff and I really enjoyed those moments. 3. The way you think, is really what caught me. I just really hope that you haven't forgotten some of the plans that we might've mentioned during the early days. Bec of these and many more...   😊</p>
+
+					</div>
+					<div>
+						<img src="images/5.jpg" alt="" />
+						<h1>YOU ARE SPECIAL TO ME 💖</h1>
+						<p></p>
+
+					</div>
+					<div>
+
+						<h1></h1>
+						<p> Though sometimes we have misunderstandings, I'll give you the credit for being patient with me. All those times we'd spend together, "There's no treasure in this cave can match your wonders!."
+							with that... I'll give you three wishes Mr. Angelo Ruelan. 1. I wish that you'll always choose your heart and choose to be kind, and be considerate esp to us. 2. I wish that I'll get to spend the time growing with you in any aspect of our being. 3. I wish... and I know it's too early... but I really wish... that I'll the most special person to you someday. 😊🥺 Until then... let's keep the company of each other and know each other more!  <br> I'll be here through every step of your life! 🥺🥺😊💖 <br>
+
+							To many more memories to come! 🥂
+							<br><br>
+							HBD my GELO 💖
+							<br><br>
+							Yours truly, <br>
+							Jace
+
+
+
+
+						</p>
+						<p></p>
+
+					</div>
+
+					<div>
+
+						<h1> </h1>
+						<p>More to come
+						</p>
+						<p>
+							Nov 7, 2022
+						</p>
+
+
+					</div>
+	
+					<li class="content__item">
+						<button class="button button--kari">
+							<span><a href="https://open.spotify.com/playlist/1K4dEJm455SQIofbUCDKQJ?si=74b63f96a45c4d9d&pt=2f120793ceaff18b077b871b4f2f97ad">Listen</a></span>
+							<div class="marquee" aria-hidden="true">
+								<div class="marquee__inner">
+									<span>listen</span>
+									<span>listen</span>
+									<span>listen</span>
+									<span>listen </span>
+								</div>
+							</div>
+						</button>
+					</li>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+        <script type="text/javascript">
+			$(function() {
+				var $mybook 		= $('#mybook');
+				var $bttn_next		= $('#next_page_button');
+				var $bttn_prev		= $('#prev_page_button');
+				var $loading		= $('#loading');
+				var $mybook_images	= $mybook.find('img');
+				var cnt_images		= $mybook_images.length;
+				var loaded			= 0;
+				 
+				$mybook_images.each(function(){
+					var $img 	= $(this);
+					var source	= $img.attr('src');
+					$('<img/>').load(function(){
+						++loaded;
+						if(loaded == cnt_images){
+							$loading.hide();
+							$bttn_next.show();
+							$bttn_prev.show();
+							$mybook.show().booklet({
+								name:               null,                            //  
+								width:              800,                             //  
+								height:             500,                             //   
+								speed:              600,                             //  
+								direction:          'LTR',                           //  
+								                           //  
+								next:               $bttn_next,          			//  
+								prev:               $bttn_prev,          			//  
+								                       
+							});
+							Cufon.refresh();
+						}
+					}).attr('src',source);
+				});
+				
+			});
+        </script>
+ 
+    </body>
+ 
+</html>
